@@ -1,0 +1,180 @@
+/* ================= CARD BASE ================= */
+.card {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    max-width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* ================= DASHBOARD CARD ================= */
+.dashboard-card-body {
+    height: 350px;
+    overflow-y: auto;
+}
+
+/* ================= KPI CARD ================= */
+.kpi-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    border-top: 4px solid;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* KPI ICON */
+.kpi-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+/* BORDER COLORS */
+.border-primary { border-top-color: #0d6efd; }
+.border-success { border-top-color: #198754; }
+.border-danger { border-top-color: #dc3545; }
+.border-warning { border-top-color: #ffc107; }
+
+/* ================= AVATAR ================= */
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0d6efd;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* ================= TABLE ================= */
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+/* ================= BUTTON ================= */
+.btn-sm {
+    margin-right: 4px;
+}
+
+/* ================= PROGRESS BAR ================= */
+.progress {
+    height: 8px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+/* ================= RECENT EMPLOYEES ================= */
+#recentEmployees {
+    padding: 20px;
+}
+
+#recentEmployees .border {
+    transition: 0.2s ease;
+}
+
+#recentEmployees .border:hover {
+    transform: translateY(-2px);
+    background: #f8f9fa;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* MOBILE */
+@media (max-width: 576px) {
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    h6 {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+}
+
+/* TABLET */
+@media (min-width: 577px) and (max-width: 991px) {
+    .card-body {
+        padding: 2rem;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 992px) {
+    .card {
+        border-radius: 14px;
+    }
+}
+
+
+
+
+
+#loginSection,
+#signupSection {
+  
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+
+
+}
+
+.custom-navbar {
+    background:  #1e3a8a ;
+}
+
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #e2e8f0 !important;
+}
+
+.custom-navbar .nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
+
+.card:hover {
+    transform: none !important;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+#dashboardSection,
+#employeeListView {
+    background: #f4f6f9; /* light modern dashboard background */
+    min-height: 100vh;
+    
+}

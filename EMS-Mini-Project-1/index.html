@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Management System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <!-- Signup -->
+    <div id="signupSection" class="card p-4">
+        <h3>Create Account</h3>
+
+        <input type="text" id="signupUsername" class="form-control mb-2" placeholder="Username">
+        <input type="password" id="signupPassword" class="form-control mb-2" placeholder="Password">
+        <input type="password" id="confirmPassword" class="form-control mb-2" placeholder="Confirm Password">
+
+        <button class="btn btn-primary w-100" onclick="signup()">Create Account</button>
+
+        <p class="mt-2">
+            Already have account?
+            <a href="#" onclick="showLogin()">Login</a>
+        </p>
+    </div>
+
+    <!-- Login -->
+    <div id="loginSection" class="card p-4 d-none">
+        <h3>Login</h3>
+
+        <input type="text" id="loginUsername" class="form-control mb-2" placeholder="Username">
+        <input type="password" id="loginPassword" class="form-control mb-2" placeholder="Password">
+
+        <button class="btn btn-success w-100" onclick="login()">Login</button>
+
+        <p class="mt-2">
+            Don’t have account?
+            <a href="#" onclick="showSignup()">Signup</a>
+        </p>
+    </div>
+
+</div>
+
+<!-- Dashboard -->
+<div id="dashboardSection" class="d-none">
+
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <span class="navbar-brand">EMS Dashboard</span>
+        <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="container mt-4">
+
+        <!-- KPI -->
+        <div class="row text-center">
+
+            <div class="col-md-3"><div class="card p-3"><h5>Total</h5><h3 id="totalEmployees">0</h3></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Active</h5><h3 id="activeEmployees">0</h3></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Inactive</h5><h3 id="inactiveEmployees">0</h3></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Departments</h5><h3 id="departments">0</h3></div></div>
+
+        </div>
+
+        <div class="mt-4 text-end">
+            <button class="btn btn-primary" onclick="showAddEmployee()">+ Add Employee</button>
+        </div>
+
+        <div class="card mt-3 p-3">
+            <h5>Employees</h5>
+            <table class="table table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTable"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="employeeModal">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+
+      <h5>Add / Edit Employee</h5>
+
+      <input type="text" id="empName" class="form-control mb-2" placeholder="Full Name">
+      <input type="email" id="empEmail" class="form-control mb-2" placeholder="Email">
+      <input type="text" id="empPhone" class="form-control mb-2" placeholder="Phone">
+
+      <select id="empDepartment" class="form-control mb-2">
+        <option value="">Select Department</option>
+        <option>IT</option>
+        <option>HR</option>
+        <option>Finance</option>
+      </select>
+
+      <input type="number" id="empSalary" class="form-control mb-2" placeholder="Salary">
+
+      <select id="empStatus" class="form-control mb-2">
+        <option value="">Select Status</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+
+      <div class="text-end">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="addEmployee()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3">
+  <div id="toastMsg" class="toast text-bg-success border-0">
+    <div class="d-flex">
+      <div class="toast-body" id="toastText"></div>
+      <button class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

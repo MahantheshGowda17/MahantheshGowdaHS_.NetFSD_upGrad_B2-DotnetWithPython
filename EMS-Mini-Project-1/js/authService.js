@@ -1,29 +1,96 @@
-// authService.js
+const authService = {
 
-import { loadUsers, saveUsers } from "./storageService.js";
-import { validateSignup } from "./validationService.js";
+    // 🔐 LOGIN (API)
+    async login(username, password) {
 
-export function signup(username, password, confirmPassword) {
-    let error = validateSignup(username, password, confirmPassword);
-    if (error) return error;
+        try {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
 
-    let users = loadUsers();
+            // ❗ check response first
+            if (!res.ok) {
+                return { success: false, errors: { general: "Invalid credentials" } };
+            }
 
-    if (users.find(u => u.username === username))
-        return "User already exists";
+            const data = await res.json();
 
-    users.push({ username, password });
-    saveUsers(users);
+            // ❗ safe handling
+            if (!data || !data.token) {
+                return { success: false, errors: { general: data?.message || "Login failed" } };
+            }
 
-    return "SUCCESS";
-}
+            // ✅ Save session
+            sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("user", data.username || username);
+            sessionStorage.setItem("role", data.role || "Viewer");
 
-export function login(username, password) {
-    let users = loadUsers();
+            return { success: true, message: "Login successful!" };
 
-    let user = users.find(u => u.username === username && u.password === password);
+        } catch (err) {
+            console.error("Login error:", err);
+            return { success: false, errors: { general: "Server error" } };
+        }
+    },
 
-    if (!user) return "Invalid credentials";
+    // 🔐 SIGNUP (API)
+    async signup(username, password) {
 
-    return "SUCCESS";
+        try {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                return { success: false, errors: { general: data?.message || "Signup failed" } };
+            }
+
+            return { success: true, message: "Signup successful! Please login." };
+
+        } catch (err) {
+            console.error("Signup error:", err);
+            return { success: false, errors: { general: "Server error" } };
+        }
+    },
+
+    // 🔐 TOKEN
+    getToken() {
+        return sessionStorage.getItem("token");
+    },
+
+    // 🔐 AUTH CHECK
+    isLoggedIn() {
+        return !!sessionStorage.getItem("token");
+    },
+
+    getCurrentUser() {
+        return sessionStorage.getItem("user");
+    },
+
+    getRole() {
+        return sessionStorage.getItem("role");
+    },
+
+    // 🔐 LOGOUT
+    logout() {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("role");
+    }
+};
+
+
+// Export for Node.js tests
+if (typeof module !== "undefined") {
+    module.exports = authService;
 }
